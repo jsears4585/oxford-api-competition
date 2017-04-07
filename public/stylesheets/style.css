@@ -1,0 +1,111 @@
+body {
+  background: #303133;
+  padding: 50px;
+  font-family: 'Josefin Slab', serif;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #bb432c;
+}
+
+.again {
+  color: #6aaeff;
+  cursor: pointer;
+}
+
+.octocat {
+  width: 120px;
+  position: absolute;
+  right: 31px;
+  top: 34px;
+  display: none;
+}
+
+a:hover, a:active, a:visited, a:link {
+  color: #bb432c;
+}
+
+#header {
+  height: 150px;
+}
+
+#main_h1 {
+  text-indent: 20px;
+  color: #afafaf;
+  text-shadow: #bd5e5e 0 0 23px;
+  margin-bottom: 20px;
+  font-family: 'Bangers', cursive;
+  font-size: 90px;
+  max-width: 60%;
+}
+
+#search {
+  margin: 10px;
+  text-align: center;
+  width: 575px;
+  height: 70px;
+  font-size: 1.7em;
+  border-radius: 3px;
+  font-family: 'Josefin Slab', serif;
+}
+
+#results {
+  width: 100%;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+#whisper {
+  color: #cacaca;
+  font-size: 40px;
+  width: 70%;
+  padding-left: 0.777777em;
+}
+
+#path {
+  width: 100%;
+  text-align: right;
+  color: #bb432c;
+  position: relative;
+  top: -200px;
+}
+
+#path h1 {
+  font-size: 86px;
+}
+
+#path h4 {
+  font-size: 36px;
+}
+
+#left-div {
+  width: 70%;
+  float: left;
+  margin-bottom: 72px;
+}
+
+#right-div {
+  width: 30%;
+  float: right;
+  margin-bottom: 72px;
+  margin-top: 110px;
+}
+
+.new_word {
+  margin: 10px;
+  box-shadow: rgb(242, 250, 220) 0px 0px 14px -3px inset; 
+  background: linear-gradient(rgb(219, 230, 196) 5%, rgb(155, 168, 146) 100%) rgb(219, 230, 196); 
+  border-radius: 6px; 
+  border: 1px solid rgb(178, 184, 173); 
+  display: inline-block; 
+  cursor: pointer; 
+  color: rgb(37, 62, 19); 
+  font-family: 'Josefin Slab', serif;
+  font-size: 28px; 
+  font-weight: bold; 
+  padding: 12px 35px; 
+  text-decoration: none; 
+  text-shadow: rgb(206, 217, 191) 0px 1px 0px;
+}
