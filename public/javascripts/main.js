@@ -5,6 +5,7 @@
 To Do
 
 1. Game Logic
+    - add try again logic
     - init game object with defaults
 2. More Fun
     - cool animations?
@@ -39,6 +40,14 @@ $(function() {
     
     var count = 0;
     var max_choices = 14;
+    var destination;
+    
+    var is_correctAnswer = function() {
+        $('#results').empty();
+        $('#choices_remaining').empty();
+        $('#path').append("<h4><span class='again'>" + destination + "</span></h4>");
+        $('#goal_word').empty().append("<h1>Your journey was successful! You made it to " + destination + " in " + count + " choices.</h1>");
+    };
 
     var buttonAppend = function(senses) {
         $('#results').empty();
@@ -55,7 +64,6 @@ $(function() {
                     });
                 });    
             }
-            
         });
         bindClickEvent();
     };
@@ -73,6 +81,10 @@ $(function() {
         $('.new_word').on('click', function(e) {
             var $self = $(this);
             var parameters = { search: $(this).attr("data-word") };
+            if ($(this).attr("data-word") === destination) {
+                is_correctAnswer();
+                return;
+            }
             $.get( '/lookup', parameters, function(data) {
                 try {
                     var data_parsed = JSON.parse(data);
@@ -103,6 +115,7 @@ $(function() {
                     buttonAppend(senses);
                     $('#search').remove();
                     var ant = senses[0]['antonyms'][0].id;
+                    destination = ant;
                     if (ant) {
                         $('#goal_word').append("<h1>Your goal word for this round is:  <span class='again'>" + ant + "</span></h1>");   
                     } else {
