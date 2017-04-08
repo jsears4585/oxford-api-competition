@@ -27,8 +27,12 @@ a:hover, a:active, a:visited, a:link {
   color: #bb432c;
 }
 
+#wrapper {
+  min-width: 860px;
+}
+
+
 #header {
-  height: 310px;
   padding: 10px 20px;
   border-radius: 8px;
 }
@@ -39,7 +43,7 @@ a:hover, a:active, a:visited, a:link {
   margin-bottom: 20px;
   font-family: 'Bangers', cursive;
   font-size: 90px;
-  max-width: 60%;
+  max-width: 90%;
 }
 
 #search {
@@ -53,17 +57,14 @@ a:hover, a:active, a:visited, a:link {
 }
 
 #results {
-  width: 100%;
+  width: 90%;
   display: inline-block;
   margin-top: 10px;
 }
 
 #results, #goal_word, #choices_remaining {
+  width: 90%;
   color: #cacaca;
-}
-
-#goal_word {
-  max-width: 420px;
 }
 
 #whisper {
@@ -76,8 +77,6 @@ a:hover, a:active, a:visited, a:link {
   width: 95%;
   text-align: right;
   color: #bb432c;
-  position: relative;
-  top: -136px;
   padding-right: 20px;
 }
 
@@ -100,10 +99,6 @@ a:hover, a:active, a:visited, a:link {
   float: right;
   margin-bottom: 72px;
   margin-top: 110px;
-}
-
-#wrapper {
-  min-width: 1080px;
 }
 
 .new_word {
