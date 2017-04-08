@@ -43,7 +43,7 @@ CSS fixes
 $(function() {
     
     var count = 0;
-    var max_choices = 14;
+    var max_choices = 3;
     var destination;
     
     var is_correctAnswer = function() {
@@ -76,8 +76,15 @@ $(function() {
         if (count >= max_choices) {
             $('#results').empty().append("<div id='whisper'>Your journey has come to an end,<br> would you like to begin <span class='again'>again?</span></div");
             $('.octocat').fadeIn("slow");
-            $('#choices_remaining').empty();
-            return;
+            $('.again').on('click', function(e) {
+                $('#choices_remaining').empty();
+                $('#results').empty();
+                $('#goal_word').empty();
+                $('#path').empty();
+                $('#search').show().val("");
+                $('#octocat').hide();
+                count = 0;
+            });
         }  
     };
 
@@ -132,7 +139,7 @@ $(function() {
                     }
                     $('#path').append("<h1>" + $self_val + "</h1>");
                     buttonAppend(senses);
-                    $('#search').remove();
+                    $('#search').hide();
                 } catch(e) {
                     alert("Try another word!");
                     $('#search').val("");

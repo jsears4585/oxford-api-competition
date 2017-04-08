@@ -15,7 +15,7 @@ a {
   cursor: pointer;
 }
 
-.octocat {
+#octocat {
   width: 120px;
   position: absolute;
   right: 31px;
