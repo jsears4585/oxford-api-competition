@@ -5,14 +5,9 @@
 To Do
 
 1. Game Logic
-    - introduce endwords
-        - provide suggestions with antonyms?
-    - steps remaining counter?
     - init game object with defaults
 2. More Fun
     - cool animations?
-3. Look and Feel
-    - new fonts, something with more flair
 4. Allow users to share their journey
     - Twitter oAuth?
     - Share journey at any point?
@@ -43,37 +38,33 @@ To Do
 $(function() {
     
     var count = 0;
-    
-    var rmvUnderscores = function(word) {
-        var clean_str = "";
-        var match_pattern = word.match(/_/gi);
-        if (match_pattern) {
-            clean_str = word.replace(/_/gi, " ");
-            clean_str = '"' + clean_str + '"';
-        } else {
-            clean_str = word;
-        }
-        return clean_str;
-    };
+    var max_choices = 14;
 
     var buttonAppend = function(senses) {
         $('#results').empty();
         senses.forEach(function(sense) {
             sense['synonyms'].forEach(function(x) {
-               var id = x['id'];
-               var new_id = decodeURIComponent(id);
-               new_id = rmvUnderscores(new_id);
-               var button = '<button class="new_word" data-word="' + id + '">' + new_id + '</button>';
+               var button = '<button class="new_word" data-word="' + x.id + '">' + x.text + '</button>';
                $('#results').append(button); 
             });
+            if (sense['subsenses']) {
+                sense['subsenses'].forEach(function(n) {
+                    n.synonyms.forEach(function(z) {
+                        var button = '<button class="new_word" data-word="' + z.id + '">' + z.text + '</button>';
+                        $('#results').append(button); 
+                    });
+                });    
+            }
+            
         });
         bindClickEvent();
     };
 
     var checkAttempts =function() {
-        if (count >= 7) {
+        if (count >= max_choices) {
             $('#results').empty().append("<div id='whisper'>Your journey has come to an end,<br> would you like to begin <span class='again'>again?</span></div");
             $('.octocat').fadeIn("slow");
+            $('#choices_remaining').empty();
             return;
         }  
     };
@@ -90,6 +81,7 @@ $(function() {
                     var senses = data_parsed.results[0].lexicalEntries[0].entries[0].senses;
                     buttonAppend(senses);
                     checkAttempts();
+                    $('#choices_remaining').empty().append("<h1>Choices remaining:  " + (max_choices - count) + "</h1>");
                 } catch(e) {
                     $self.hide('slow', function() {
                        $self.remove(); 
@@ -110,7 +102,12 @@ $(function() {
                     var senses = data_parsed.results[0].lexicalEntries[0].entries[0].senses;
                     buttonAppend(senses);
                     $('#search').remove();
-                    $('#left-div').css("margin-top", "10px");
+                    var ant = senses[0]['antonyms'][0].id;
+                    if (ant) {
+                        $('#goal_word').append("<h1>Your goal word for this round is:  <span class='again'>" + ant + "</span></h1>");   
+                    } else {
+                        return;
+                    }
                 } catch(e) {
                     alert("Try another word!");
                     $('#search').val("");

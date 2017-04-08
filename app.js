@@ -23,12 +23,12 @@ app.get('/lookup', function(req, res){
   var word = req.query.search;
   var options = {
     host: 'od-api.oxforddictionaries.com',
-    path: '/api/v1/entries/en/' + word + '/synonyms',
+    path: '/api/v1/entries/en/' + word + '/synonyms;antonyms',
     port: '443',
     headers: {
       'Accept': 'application/json',
-      'app_id': 'APP_ID',
-      'app_key': 'APP_KEY'
+      'app_id': 'd1dfedcf',
+      'app_key': '70e31c22311c5376ebeaed1471cd86f2'
     }
   };
   var callback = function(response) {
