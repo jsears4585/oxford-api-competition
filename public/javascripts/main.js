@@ -43,7 +43,7 @@ CSS fixes
 $(function() {
     
     var count = 0;
-    var max_choices = 3;
+    var max_choices = 14;
     var destination;
     
     var is_correctAnswer = function() {
