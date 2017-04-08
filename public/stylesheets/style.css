@@ -28,11 +28,12 @@ a:hover, a:active, a:visited, a:link {
 }
 
 #header {
-  height: 230px;
+  height: 310px;
+  padding: 10px 20px;
+  border-radius: 8px;
 }
 
 #main_h1 {
-  text-indent: 20px;
   color: #afafaf;
   text-shadow: #bd5e5e 0 0 23px;
   margin-bottom: 20px;
@@ -61,11 +62,14 @@ a:hover, a:active, a:visited, a:link {
   color: #cacaca;
 }
 
+#goal_word {
+  max-width: 420px;
+}
+
 #whisper {
   color: #cacaca;
   font-size: 40px;
   width: 70%;
-  padding-left: 0.777777em;
 }
 
 #path {
@@ -73,15 +77,15 @@ a:hover, a:active, a:visited, a:link {
   text-align: right;
   color: #bb432c;
   position: relative;
-  top: -200px;
+  top: -136px;
 }
 
 #path h1 {
-  font-size: 86px;
+  font-size: 56px;
 }
 
 #path h4 {
-  font-size: 36px;
+  font-size: 26px;
 }
 
 #left-div {
@@ -95,6 +99,10 @@ a:hover, a:active, a:visited, a:link {
   float: right;
   margin-bottom: 72px;
   margin-top: 110px;
+}
+
+#wrapper {
+  min-width: 1080px;
 }
 
 .new_word {

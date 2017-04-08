@@ -4,6 +4,8 @@
 
 To Do
 
+CSS fixes
+
 1. Game Logic
     - add try again logic
     - init game object with defaults
