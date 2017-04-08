@@ -73,11 +73,12 @@ a:hover, a:active, a:visited, a:link {
 }
 
 #path {
-  width: 100%;
+  width: 95%;
   text-align: right;
   color: #bb432c;
   position: relative;
   top: -136px;
+  padding-right: 20px;
 }
 
 #path h1 {
