@@ -46,7 +46,7 @@ $(function() {
         $('#results').empty();
         $('#choices_remaining').empty();
         $('#path').append("<h4><span class='again'>" + destination + "</span></h4>");
-        $('#goal_word').empty().append("<h1>Your journey was successful! You made it to " + destination + " in " + count + " choices.</h1>");
+        $('#goal_word').empty().append("<h1>Success! You completed your journey with " + count + " choices.</h1>");
     };
 
     var buttonAppend = function(senses) {
