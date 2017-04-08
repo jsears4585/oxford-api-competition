@@ -1,44 +1,5 @@
 /*global $*/
 
-/*
-
-To Do
-
-CSS fixes
-
-// if antonym isn't found, do not print results
-
-1. Game Logic
-    - add try again logic
-    - init game object with defaults
-2. More Fun
-    - cool animations?
-4. Allow users to share their journey
-    - Twitter oAuth?
-    - Share journey at any point?
-5. Errors
-    - handle error if no words are left
-    - allow person to move backwards in their list?
-6. Education
-    - add links to oxforddictionaries in list?
-    - add senses to break up the buttons?
-        - possible strategy add
-7. Options
-    - allow ninja to select length of journey?
-8. Database
-    - write words to db that don't parse
-        - clean them from future outputs?
-9. Off the wall
-    - accompaniment to final blurb
-        - mad libs?
-        - procedural poetry?
-10. API
-    - dive back into the API and see what else we've got
-        - can we do something with parts of speech?
-        - synonyms?
-        - definitions?
-        
-*/
 
 $(function() {
     
@@ -55,19 +16,29 @@ $(function() {
 
     var buttonAppend = function(senses) {
         $('#results').empty();
+        var arr = [];
         senses.forEach(function(sense) {
             sense['synonyms'].forEach(function(x) {
                var button = '<button class="new_word" data-word="' + x.id + '">' + x.text + '</button>';
-               $('#results').append(button); 
+               //$('#results').append(button); 
+               arr.push(button);
             });
             if (sense['subsenses']) {
                 sense['subsenses'].forEach(function(n) {
                     n.synonyms.forEach(function(z) {
                         var button = '<button class="new_word" data-word="' + z.id + '">' + z.text + '</button>';
-                        $('#results').append(button); 
+                        //$('#results').append(button); 
+                        arr.push(button);
                     });
                 });    
             }
+        });
+        arr.sort(function(a, b) {
+            return a.localeCompare(b);
+        });
+        var unique_arr = arr.filter((v, i, a) => a.indexOf(v) === i );
+        unique_arr.forEach(function(uni) {
+            $('#results').append(uni);
         });
         bindClickEvent();
     };
@@ -77,7 +48,7 @@ $(function() {
             $('#results').empty().append("<div id='whisper'>Your journey has come to an end,<br> would you like to begin <span class='again'>again?</span></div");
             $('.octocat').fadeIn("slow");
             $('.again').on('click', function(e) {
-                $('#choices_remaining').empty();
+                $('#choices_remaining').empty(); // stack these?
                 $('#results').empty();
                 $('#goal_word').empty();
                 $('#path').empty();
@@ -122,12 +93,13 @@ $(function() {
                 try {
                     var data_parsed = JSON.parse(data);
                     var senses = data_parsed.results[0].lexicalEntries[0].entries[0].senses;
-                    var ant = senses[0]['antonyms'][0].id;
-                    var len = 0;
-                    var use;
+                    var ant = senses[0]['antonyms'][0].text;
                     if (ant) {
+                        var len = ant.length;
+                        var use = ant;
                         senses[0]['antonyms'].forEach(function(q) {
-                            if (q.text.length > len) {
+                            if (q.text.length < len) {
+                                len = q.text.length;
                                 use = q.text;   
                             }
                         });
