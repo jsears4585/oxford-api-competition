@@ -60,6 +60,7 @@ a:hover, a:active, a:visited, a:link {
   width: 90%;
   display: inline-block;
   margin-top: 10px;
+  padding: 20px;
 }
 
 #results, #goal_word, #choices_remaining {

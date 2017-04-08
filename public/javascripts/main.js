@@ -6,6 +6,8 @@ To Do
 
 CSS fixes
 
+// if antonym isn't found, do not print results
+
 1. Game Logic
     - add try again logic
     - init game object with defaults
@@ -112,17 +114,25 @@ $(function() {
             $.get( '/lookup', parameters, function(data) {
                 try {
                     var data_parsed = JSON.parse(data);
-                    $('#path').append("<h1>" + $self_val + "</h1>");
                     var senses = data_parsed.results[0].lexicalEntries[0].entries[0].senses;
-                    buttonAppend(senses);
-                    $('#search').remove();
                     var ant = senses[0]['antonyms'][0].id;
-                    destination = ant;
+                    var len = 0;
+                    var use;
                     if (ant) {
-                        $('#goal_word').append("<h1>Your goal word for this round is:  <span class='again'>" + ant + "</span></h1>");   
+                        senses[0]['antonyms'].forEach(function(q) {
+                            if (q.text.length > len) {
+                                use = q.text;   
+                            }
+                        });
+                        destination = use;
+                        $('#goal_word').append("<h1>Your goal word for this round is:  <span class='again'>" + use + "</span></h1>");   
                     } else {
+                        $('#results').empty();
                         return;
                     }
+                    $('#path').append("<h1>" + $self_val + "</h1>");
+                    buttonAppend(senses);
+                    $('#search').remove();
                 } catch(e) {
                     alert("Try another word!");
                     $('#search').val("");
