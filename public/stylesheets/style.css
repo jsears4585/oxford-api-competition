@@ -4,15 +4,30 @@ body {
   font-family: 'Josefin Slab', serif;
 }
 
+h1, h2, h3, h4, h5, h6 {  color: white; }
+
 a {
   cursor: pointer;
   text-decoration: none;
   color: #bb432c;
+  padding: 10px;
 }
+
+input {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 8px;
+}
+
+p { color: #fff; }
 
 .again {
   color: #6aaeff;
   cursor: pointer;
+}
+
+#nav {
+  float: right;
 }
 
 #octocat {

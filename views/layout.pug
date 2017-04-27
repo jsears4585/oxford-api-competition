@@ -6,4 +6,16 @@ html
     link(rel='stylesheet', href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css")
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    div(id="wrapper")
+    
+      div(id="nav")
+        a(href="/") Play!
+        
+        if !currentUser
+          a(href="signup") Register
+          a(href="login") Sign In
+        
+        if currentUser
+          a(href="profile") My Profile
+          a(href="logout") Log out
     block content

@@ -1,24 +1,22 @@
 extends layout
 
 block content
-
-  div(id="wrapper")
-    
-    div(class="row-fluid")
-      div(id="left-div")
-        div(id="header")
-          h1(id="main_h1") Synonyms Ninja
-          a(href="https://github.com/jsears4585", target="_blank")
-            img(id="octocat", src="/images/octocat.png")
-          div(id="goal_word")
-          div(id="choices_remaining")
-        input#search(type="search", autocomplete="off", 
-                    placeholder="Your journey begins with a single word...", onfocus="this.placeholder = ''", 
-                    onblur="this.placeholder='Your journey begins with a single word...'")
-        div#results
-    
-      div(id="right-div")
-        div#path
+      
+  div(class="row-fluid")
+    div(id="left-div")
+      div(id="header")
+        h1(id="main_h1") Synonyms Ninja
+        a(href="https://github.com/jsears4585", target="_blank")
+          img(id="octocat", src="/images/octocat.png")
+        div(id="goal_word")
+        div(id="choices_remaining")
+      input#search(type="search", autocomplete="off", 
+                  placeholder="Your journey begins with a single word...", onfocus="this.placeholder = ''", 
+                  onblur="this.placeholder='Your journey begins with a single word...'")
+      div#results
+  
+    div(id="right-div")
+      div#path
   
   script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
   script(src="/javascripts/main.js")

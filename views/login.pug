@@ -1,0 +1,20 @@
+extends layout
+
+block content
+
+  div(class="row-fluid")
+    div(id="left-div")
+      div(id="header")
+        h1(id="main_h1") Synonyms Ninja
+        form(method='POST' action='/login')
+          input#username(type="email", name="email", placeholder="Your email")
+          br
+          input#password(type="password", name="password", placeholder="Your password")
+          br
+          input#submit(type="submit", name="submit")
+
+        p
+          | Need an account? 
+          a(href="/signup") sign up here!
+  
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")

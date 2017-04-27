@@ -1,6 +1,5 @@
 /*global $*/
 
-
 $(function() {
     
     var count = 0;
@@ -20,14 +19,12 @@ $(function() {
         senses.forEach(function(sense) {
             sense['synonyms'].forEach(function(x) {
                var button = '<button class="new_word" data-word="' + x.id + '">' + x.text + '</button>';
-               //$('#results').append(button); 
                arr.push(button);
             });
             if (sense['subsenses']) {
                 sense['subsenses'].forEach(function(n) {
                     n.synonyms.forEach(function(z) {
                         var button = '<button class="new_word" data-word="' + z.id + '">' + z.text + '</button>';
-                        //$('#results').append(button); 
                         arr.push(button);
                     });
                 });    
@@ -89,7 +86,7 @@ $(function() {
         if(e.keyCode === 13) {
             var $self_val = $(this).val();
             var parameters = { search: $self_val };
-            $.get( '/lookup', parameters, function(data) {
+            $.get('/lookup', parameters, function(data) {
                 try {
                     var data_parsed = JSON.parse(data);
                     var senses = data_parsed.results[0].lexicalEntries[0].entries[0].senses;
@@ -121,4 +118,3 @@ $(function() {
     });
     
 });
-

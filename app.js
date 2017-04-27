@@ -1,49 +1,46 @@
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var https = require('https');
-
-var index = require('./routes/index');
+var MongoStore = require('connect-mongo')(session);
+var mongoose = require('mongoose');
 var app = express();
 
+// mondoDB conn
+mongoose.connect('mongodb://localhost:27017');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+
+// use sessions to tracking logins
+app.use(session({
+  secret: 'IUY3H987SDU',
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({
+    mongooseConnection: db
+  })
+}));
+
+// make user ID available in templates
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.session.userId;
+  next();
+});
+
+// standard setup with pug, logger, body&cookie-parsers
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-
-app.get('/lookup', function(req, res){
-  var word = req.query.search;
-  var options = {
-    host: 'od-api.oxforddictionaries.com',
-    path: '/api/v1/entries/en/' + word + '/synonyms;antonyms',
-    port: '443',
-    headers: {
-      'Accept': 'application/json',
-      'app_id': 'APP_ID',
-      'app_key': 'APP_KEY'
-    }
-  };
-  var callback = function(response) {
-    var str = '';
-    response.on('data', function(chunk) {
-      str += chunk;
-    });
-    
-    response.on('end', function() {
-      res.send(str);
-    });
-  };
-  var request = https.request(options, callback);
-  request.end();
-});
+// route declaration
+var routes = require('./routes/index');
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
